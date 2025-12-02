@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_real_estate_site_form" model="ir.ui.view">
+    <field name="name">real.estate.site.form</field>
+    <field name="model">real.estate.site</field>
+    <field name="arch" type="xml">
+      <form string="الموقع/المشروع">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="parent_id"/>
+            <field name="company_id"/>
+          </group>
+          <group string="العنوان">
+            <field name="street"/>
+            <field name="street2"/>
+            <field name="city"/>
+            <field name="state_id"/>
+            <field name="zip"/>
+            <field name="country_id"/>
+          </group>
+        </sheet>
+        <chatter/>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_real_estate_site_tree" model="ir.ui.view">
+    <field name="name">real.estate.site.tree</field>
+    <field name="model">real.estate.site</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="parent_id"/>
+        <field name="company_id"/>
+        <field name="city"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_real_estate_site" model="ir.actions.act_window">
+    <field name="name">المشاريع/المواقع</field>
+    <field name="res_model">real.estate.site</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_estate_root" name="إدارة العقارات"/>
+  <menuitem id="menu_estate_sites" name="المشاريع/المواقع" parent="menu_estate_root" action="action_real_estate_site"/>
+</odoo>

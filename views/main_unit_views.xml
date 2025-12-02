@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_estate_main_unit_form" model="ir.ui.view">
+    <field name="name">estate.main.unit.form</field>
+    <field name="model">estate.main.unit</field>
+    <field name="arch" type="xml">
+      <form string="الوحدة الرئيسية">
+        <header>
+          <field name="state" widget="statusbar" statusbar_visible="active,hidden"/>
+
+          <!-- زر إنشاء وحدات فرعية -->
+          <button name="action_generate_sub_units"
+                  type="object"
+                  string="إنشاء وحدات فرعية"
+                  class="btn-secondary"/>
+
+          <!-- زر إنشاء أصل: سيُمنع التنفيذ في البايثون إذا لم تتوفر المحاسبة -->
+          <button name="action_generate_asset"
+                  type="object"
+                  string="إنشاء أصل"
+                  class="btn-primary"/>
+        </header>
+
+        <sheet>
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="code"/>
+              <field name="site_id" readonly="id != False"/>
+              <field name="owner_id"/>
+              <field name="company_id"/>
+              <field name="active"/>
+            </group>
+            <group>
+              <field name="purchase_date"/>
+              <field name="launch_date"/>
+              <field name="property_type"/>
+              <!-- اختياري: أضف السطر التالي لإخفاء الزر تلقائياً بعد الإنشاء
+              <field name="asset_id" readonly="1" invisible="1"/>
+              -->
+            </group>
+          </group>
+
+          <notebook>
+            <page string="المعلومات الأساسية">
+              <group>
+                <group string="مساحات">
+                  <field name="area_roof"/>
+                  <field name="area_total"/>
+                  <field name="area_common"/>
+                </group>
+                <group string="الواجهات">
+                  <field name="face_east"/>
+                  <field name="face_west"/>
+                  <field name="face_north"/>
+                  <field name="face_south"/>
+                </group>
+              </group>
+            </page>
+
+            <page string="إنشاء وحدات فرعية">
+              <group>
+                <div class="o_form_label">أدخل القيم ثم اضغط توليد</div>
+              </group>
+              <group>
+                <field name="floors"/>
+                <field name="flats_per_floor"/>
+                <field name="shops"/>
+                <field name="warehouses"/>
+                <button name="action_generate_sub_units" type="object" string="توليد الآن" class="btn-secondary"/>
+              </group>
+              <group string="الوحدات الفرعية">
+                <field name="sub_unit_ids" context="{'default_main_unit_id': active_id, 'default_site_id': site_id}">
+                  <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="status"/>
+                  </tree>
+                  <form>
+                    <group>
+                      <field name="name"/>
+                      <field name="category"/>
+                      <field name="status"/>
+                      <field name="site_id"/>
+                      <field name="main_unit_id" invisible="1"/>
+                    </group>
+                  </form>
+                </field>
+              </group>
+            </page>
+
+            <page string="صور الوحدة">
+              <group>
+                <field name="image_128" widget="image"/>
+                <field name="image_1024" widget="image"/>
+              </group>
+            </page>
+
+            <page string="مستندات">
+              <group>
+                <field name="attachment_ids" widget="many2many_binary"/>
+              </group>
+            </page>
+
+            <page string="مخططات الأدوار">
+              <group>
+                <div class="o_form_label">أضف مخططات الأدوار كمرفقات أو اربط موديول الرسومات لاحقاً</div>
+              </group>
+            </page>
+
+            <page string="معلومات إضافية">
+              <group>
+                <div class="o_form_label">يمكن إضافة حقول الترخيص والتواريخ الإضافية هنا لاحقاً</div>
+              </group>
+            </page>
+
+            <page string="ملاحظات">
+              <group>
+                <div class="o_form_label">استخدم لوحة المحادثة على اليسار لتدوين الملاحظات وتتبع النشاط</div>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter/>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_estate_main_unit_tree" model="ir.ui.view">
+    <field name="name">estate.main.unit.tree</field>
+    <field name="model">estate.main.unit</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="site_id"/>
+        <field name="property_type"/>
+        <field name="state"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_estate_main_unit" model="ir.actions.act_window">
+    <field name="name">الوحدات الرئيسية</field>
+    <field name="res_model">estate.main.unit</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_estate_main_units" name="الوحدات الرئيسية" parent="menu_estate_root" action="action_estate_main_unit" sequence="20"/>
+</odoo>

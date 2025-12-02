@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- Form -->
+  <record id="view_estate_sub_unit_form" model="ir.ui.view">
+    <field name="name">estate.sub.unit.form</field>
+    <field name="model">estate.sub.unit</field>
+    <field name="arch" type="xml">
+      <form string="الوحدات الفرعية">
+        <header>
+          <field name="status" widget="statusbar" statusbar_visible="available,reserved,rented,hidden"/>
+        </header>
+
+        <sheet>
+          <!-- رأس بعمود صورة وعمود بيانات كما بالصورة -->
+       <group col="4" colspan="4">
+  <group colspan="1" class="o_col-3">
+    <field name="image_128" widget="image" options="{'size':[256,256]}"/>
+  </group>
+  <group colspan="3" class="o_col-9">
+    <group>
+      <field name="name"/>
+      <field name="category" string="عقار"/>
+      <field name="site_id" string="المشروع"/>
+    </group>
+    <group>
+      <field name="can_rent" string="متوفر للإيجار"/>
+      <field name="can_sell" string="متوفر للبيع"/>
+      <field name="video_url" string="رابط الفيديو"/>
+    </group>
+    <group>
+      <field name="active" string="نشط ؟"/>
+      <field name="company_id" string="الشركة"/>
+      <field name="salesperson_id" string="مسؤول المبيعات"/>
+    </group>
+    <!-- اختياريان لإظهار النص الموجود بالصورة -->
+
+    <group>
+      <field name="apply_tax" string="تطبيق الضريبة"/>
+      <field name="analytic_account" string="حساب تحليلي"/>
+    </group>
+
+  </group>
+</group>
+<notebook>
+
+  <!-- المعلومات الأساسية -->
+ <page string="المعلومات الأساسية">
+  <group col="2">
+    <!-- عمود العناوين (نصوص فقط) -->
+    <group>
+      <div class="o_form_label">نوع الوحدة/الحالة</div>
+      <div class="o_form_label">سعر الإيجار/الشهر ؟</div>
+      <div class="o_form_label">السطح</div>
+      <div class="o_form_label">شامل الواجه</div>
+      <div class="o_form_label">مساحة الحديقة</div>
+      <div class="o_form_label">مساحة البلكونات</div>
+      <div class="o_form_label">نظام الطاقة الشمسية</div>
+      <div class="o_form_label">مصدر المياه</div>
+      <div class="o_form_label">عداد الكهرباء</div>
+      <div class="o_form_label">التكلفة</div>
+      <div class="o_form_label">مبلغ التأمين</div>
+      <div class="o_form_label">سعر البيع</div>
+      <div class="o_form_label">المساحة (م²)</div>
+      <div class="o_form_label">مساحة الخدمات</div>
+      <div class="o_form_label">إجمالي الواجهة</div>
+    </group>
+
+    <!-- عمود الحقول -->
+    <group>
+      <group>
+        <field name="category"/>
+        <field name="status"/>
+      </group>
+
+      <field name="rent_amount" string="سعر الإيجار/الشهر ؟"/>
+      <field name="area_roof" string="السطح"/>
+      <field name="facade_total" string="شامل الواجه"/>
+
+      <!-- إن أضفتِ garden_area و balcony_area في الموديل، بدّلي السطرين التاليين بهما -->
+      <field name="area" string="مساحة الحديقة"/>
+      <field name="area_service" string="مساحة البلكونات"/>
+
+      <field name="solar_system" string="نظام الطاقة الشمسية"/>
+      <field name="water_source" string="مصدر المياه"/>
+      <field name="elec_system" string="عداد الكهرباء"/>
+
+      <field name="cost" string="التكلفة"/>
+      <field name="deposit_amount" string="مبلغ التأمين"/>
+      <field name="sale_price" string="سعر البيع"/>
+
+      <field name="area" string="المساحة (م²)"/>
+      <field name="area_service" string="مساحة الخدمات"/>
+      <field name="facade_total" string="إجمالي الواجهة"/>
+    </group>
+  </group>
+</page>
+
+
+  <!-- محتويات الوحدة -->
+  <page string="محتويات الوحدة">
+    <field name="contents"/>
+  </page>
+
+  <!-- جهات الاتصال -->
+  <page string="جهات الاتصال">
+    <group>
+      <field name="owner_id" string="المالك"/>
+      <field name="salesperson_id" string="مسؤول المبيعات"/>
+      <field name="partner_ids" widget="many2many_tags" string="أطراف ذات صلة"/>
+    </group>
+    <group>
+      <field name="available_date" string="تاريخ الإتاحة"/>
+      <field name="video_url" string="رابط الفيديو"/>
+      <field name="company_id" string="الشركة"/>
+      <field name="active" string="نشط ؟"/>
+    </group>
+  </page>
+
+  <!-- مستندات -->
+  <page string="مستندات">
+    <group>
+      <field name="license_ref" string="رقم الترخيص"/>
+      <!-- إن رغبت مرفقات، يمكن إضافة one2many إلى ir.attachment لاحقاً -->
+    </group>
+  </page>
+
+  <!-- صور الوحدة -->
+  <page string="صور الوحدة">
+    <group>
+      <field name="image_128" widget="image" options="{'size':[256,256]}"/>
+    </group>
+  </page>
+
+  <!-- الموقع الجغرافي -->
+  <page string="الموقع الجغرافي">
+    <group>
+      <field name="geo_lat"/>
+      <field name="geo_lng"/>
+    </group>
+  </page>
+
+  <!-- معلومات إضافية -->
+  <page string="معلومات إضافية">
+    <group>
+      <div class="o_form_label">يمكن إضافة حقول إضافية (حساسية، تجهيزات خاصة، شروط) لاحقاً</div>
+    </group>
+  </page>
+
+  <!-- ملاحظات -->
+  <page string="ملاحظات">
+    <group>
+      <field name="notes"/>
+    </group>
+  </page>
+
+</notebook>
+
+        </sheet>
+        <chatter/>
+      </form>
+    </field>
+  </record>
+
+  <!-- Tree -->
+  <record id="view_estate_sub_unit_tree" model="ir.ui.view">
+    <field name="name">estate.sub.unit.tree</field>
+    <field name="model">estate.sub.unit</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="category"/>
+        <field name="status"/>
+        <field name="site_id"/>
+        <field name="main_unit_id"/>
+        <field name="rent_amount"/>
+        <field name="sale_price"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Kanban: بدون quick_create لفتح الفورم عند إنشاء -->
+  <record id="view_estate_sub_unit_kanban" model="ir.ui.view">
+    <field name="name">estate.sub.unit.kanban</field>
+    <field name="model">estate.sub.unit</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by="status" class="o_kanban_small_column">
+        <progressbar field="status" colors='{"available":"success","reserved":"warning","rented":"info","hidden":"muted"}'/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="o_kanban_record oe_kanban_global_click">
+              <div class="o_kanban_image">
+                <field name="image_128" widget="image" class="o_kanban_image"/>
+              </div>
+              <div class="o_kanban_details">
+                <strong><field name="name"/></strong>
+                <div><field name="category"/> • <field name="site_id"/></div>
+                <div t-if="record.main_unit_id.raw_value"><field name="main_unit_id"/></div>
+                <div t-if="record.rent_amount.raw_value"><span>إيجار: </span><field name="rent_amount"/></div>
+                <div t-if="record.sale_price.raw_value"><span>سعر: </span><field name="sale_price"/></div>
+                <div class="o_kanban_badge"><field name="status"/></div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_estate_sub_unit" model="ir.actions.act_window">
+    <field name="name">الوحدات الفرعية</field>
+    <field name="res_model">estate.sub.unit</field>
+    <field name="view_mode">kanban,tree,form</field>
+  </record>
+
+  <!-- Menu -->
+  <menuitem id="menu_estate_sub_units" name="الوحدات الفرعية"
+            parent="menu_estate_root" action="action_estate_sub_unit" sequence="30"/>
+</odoo>

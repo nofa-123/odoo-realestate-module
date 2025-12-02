@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_real_estate_site_user,access_real_estate_site_user,model_real_estate_site,base.group_user,1,1,1,1
+access_estate_main_unit_user,access_estate_main_unit_user,model_estate_main_unit,base.group_user,1,1,1,1
+access_estate_sub_unit_user,access_estate_sub_unit_user,model_estate_sub_unit,base.group_user,1,1,1,1
