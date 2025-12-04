@@ -8,6 +8,8 @@
         'views/site_views.xml',
         'views/main_unit_views.xml',
         'views/sub_unit_views.xml',
+        'views/booking_views.xml',
+        'views/partner_views.xml'
     ],
     'application': False,
     'installable': True,

@@ -1,0 +1,32 @@
+<odoo>
+    <!-- توسيع نموذج الشريك -->
+    <record id="view_partner_form_estate" model="ir.ui.view">
+        <field name="name">res.partner.form.estate</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="العقار">
+                    <group>
+                        <field name="estate_role"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <!-- أكشن لعرض ملاك ومستأجرين فقط (اختياري) -->
+    <record id="action_estate_partners" model="ir.actions.act_window">
+        <field name="name">شركاء العقار</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('estate_role', '!=', False)]</field>
+    </record>
+
+    <!-- منيو تحت إدارة العقارات -->
+    <menuitem id="menu_estate_partners"
+              name="الشركاء"
+              parent="menu_estate_root"
+              action="action_estate_partners"
+              sequence="30"/>
+</odoo>

@@ -22,5 +22,9 @@
 from . import site
 from  . import main_unit
 from  . import sub_unit
+from  . import partner_ext
+from  . import contract
+from  . import booking
+
 
 

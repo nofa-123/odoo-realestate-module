@@ -1,0 +1,67 @@
+<odoo>
+    <!-- نموذج الشجرة (القائمة) -->
+    <record id="view_estate_booking_tree" model="ir.ui.view">
+        <field name="name">estate.booking.tree</field>
+        <field name="model">estate.booking</field>
+        <field name="arch" type="xml">
+            <tree string="حجوزات الوحدات">
+                <field name="name"/>
+                <field name="unit_id"/>
+                <field name="tenant_id"/>
+                <field name="booking_type"/>
+                <field name="amount"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- نموذج الفورم -->
+    <record id="view_estate_booking_form" model="ir.ui.view">
+        <field name="name">estate.booking.form</field>
+        <field name="model">estate.booking</field>
+        <field name="arch" type="xml">
+            <form string="حجز وحدة">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="unit_id"/>
+                            <field name="tenant_id"/>
+                            <field name="booking_type"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm"
+                            string="تأكيد الحجز"
+                            type="object"
+                            class="btn-primary"/>
+
+                    <button string="إغلاق" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- أكشن فتح الشاشة -->
+    <record id="action_estate_booking" model="ir.actions.act_window">
+        <field name="name">حجوزات الوحدات</field>
+        <field name="res_model">estate.booking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>سجل حجوزات الوحدات العقارية من هنا.</p>
+        </field>
+    </record>
+
+    <!-- منيو تحت منيو إدارة العقارات -->
+    <menuitem id="menu_estate_booking"
+              name="حجز الوحدات"
+              parent="menu_estate_root"
+              action="action_estate_booking"
+              sequence="40"/>
+</odoo>
